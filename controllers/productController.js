@@ -26,7 +26,7 @@ const getProductById = async (req, res, next) => {
 };
 
 // ==========================================
-const rateProducts = async (req, res, next) => {
+const rateProduct = async (req, res, next) => {
   const { id } = req.params;
 
   const { rating } = req.body;
@@ -59,4 +59,4 @@ const rateProducts = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllProducts, getProductById, rateProducts };
+module.exports = { getAllProducts, getProductById, rateProduct };
