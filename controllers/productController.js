@@ -1,6 +1,6 @@
 const Product = require("../models/Product");
 
-const getAllProducts = async (res, req, next) => {
+const getAllProducts = async (req, res, next) => {
   try {
     const products = await Product.find();
 
@@ -31,7 +31,7 @@ const rateProduct = async (req, res, next) => {
 
   const { rating } = req.body;
 
-  if (!rating || rating < 1 || rating < 5) {
+  if (!rating || rating < 1 || rating > 5) {
     return res.status(400).json({ message: "Rating must be between 1 and 5" });
   }
 
@@ -46,7 +46,7 @@ const rateProduct = async (req, res, next) => {
 
     product.ratings.sum += rating;
 
-    product.ratings.average += product.ratings.sum / product.ratings.count;
+    product.ratings.average = product.ratings.sum / product.ratings.count;
 
     await product.save();
 
